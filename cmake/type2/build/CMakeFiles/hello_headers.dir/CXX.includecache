@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/hello.h
+
+/home/onimas/computer_science/cmake/type2/src/hello.cc
+iostream
+-
+hello.h
+/home/onimas/computer_science/cmake/type2/src/hello.h
+
+/home/onimas/computer_science/cmake/type2/src/main.cc
+hello.h
+/home/onimas/computer_science/cmake/type2/src/hello.h
+

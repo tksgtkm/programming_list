@@ -1,0 +1,1 @@
+/usr/bin/cc    CMakeFiles/multi_descriptors.dir/multi_descriptors.c.o  -o ../bin/multi_descriptors ../lib/liblib.a 

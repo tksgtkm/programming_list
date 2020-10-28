@@ -1,0 +1,1 @@
+/usr/bin/cc    CMakeFiles/modify_env.dir/modify_env.c.o  -o ../bin/modify_env ../lib/liblib.a 

@@ -1,0 +1,4 @@
+/home/onimas/C++/CPP_intro/cpp_practice/interpliter/build/CMakeFiles/rebuild_cache.dir
+/home/onimas/C++/CPP_intro/cpp_practice/interpliter/build/CMakeFiles/interpliter.dir
+/home/onimas/C++/CPP_intro/cpp_practice/interpliter/build/CMakeFiles/edit_cache.dir
+/home/onimas/C++/CPP_intro/cpp_practice/interpliter/build/CMakeFiles/main.dir

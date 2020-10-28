@@ -1,0 +1,1 @@
+/usr/bin/cc    CMakeFiles/copy.dir/copy.c.o  -o ../bin/copy ../lib/liblib.a 

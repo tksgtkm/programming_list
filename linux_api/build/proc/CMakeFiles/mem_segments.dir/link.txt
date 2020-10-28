@@ -1,0 +1,1 @@
+/usr/bin/cc    CMakeFiles/mem_segments.dir/mem_segments.c.o  -o ../bin/mem_segments ../lib/liblib.a 

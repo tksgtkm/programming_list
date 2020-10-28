@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/onimas/C_Unix/project/linux_api/lib/api_hdr.h
+sys/types.h
+-
+stdio.h
+-
+stdlib.h
+-
+unistd.h
+-
+errno.h
+-
+string.h
+-
+get_num.h
+/home/onimas/C_Unix/project/linux_api/lib/get_num.h
+error_functions.h
+/home/onimas/C_Unix/project/linux_api/lib/error_functions.h
+sys/file.h
+-
+
+/home/onimas/C_Unix/project/linux_api/lib/ename.c.inc
+
+/home/onimas/C_Unix/project/linux_api/lib/error_functions.c
+stdarg.h
+-
+error_functions.h
+/home/onimas/C_Unix/project/linux_api/lib/error_functions.h
+api_hdr.h
+/home/onimas/C_Unix/project/linux_api/lib/api_hdr.h
+ename.c.inc
+/home/onimas/C_Unix/project/linux_api/lib/ename.c.inc
+
+/home/onimas/C_Unix/project/linux_api/lib/error_functions.h
+
+/home/onimas/C_Unix/project/linux_api/lib/get_num.h
+

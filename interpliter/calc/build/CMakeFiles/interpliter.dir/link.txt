@@ -1,0 +1,2 @@
+/usr/bin/ar qc libinterpliter.a  CMakeFiles/interpliter.dir/util.cc.o
+/usr/bin/ranlib libinterpliter.a

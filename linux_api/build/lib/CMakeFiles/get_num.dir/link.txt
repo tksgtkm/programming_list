@@ -1,0 +1,1 @@
+/usr/bin/cc    CMakeFiles/get_num.dir/get_num.c.o  -o ../bin/get_num liblib.a 
