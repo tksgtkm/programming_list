@@ -242,3 +242,51 @@ Token getToken(string s) {
     return Token(Next, tp);
   return Token(tokenstr, tp);
 }
+
+bool Token::isStartToken() {
+  if (type == Start)
+    return true;
+  if (type == LParen)
+    return true;
+  if (type == Assign)
+    return true;
+  if (type == Comma)
+    return true;
+  retrn false;
+}
+
+void printTokenValOrLiteral(Token tt, bool crlf) {
+  if (tt.getType() == StrLiteral)
+    cout << tt.getSymbol();
+  else
+    cout << tt.getValue();
+  if (crlf)
+    cout << endl;
+}
+
+string TokenTypeName [] = { "Start", "Invalid", "Nothing", "NomoreToken",
+    "Value", "Variable", "Symbol", "StrLiteral", "LParen (", "RParen )", "Comma",
+    "*(Mult)", "/(Divide)", "+(Plus)", "-(Minus)",
+    "<(Smaller)", ">(Greater)", "==(Equal)", "!=(NotEqual)", "=(Assign)",
+    "Cmd", "End", "Print", "Println", "Printspc",
+    "Call", "Sub", "Endsub", "If", "Then", "Else", "Endif", "For", "To", "Next" } ;
+
+string tokenPosName [] = {
+  "Top", "AfterLParen", "AfterAssign", "Middle", "EndToken"
+};
+
+void Token::printToken() {
+  if (type == Value) {
+    cout << "Value: " << value << "[" << tokenPosName[position] << "]" << endl;
+    return;
+  }
+  if (type == Symbol) {
+    cout << "Symbol: " << symbol << "[" << tokenPosName[position] << "]" << endl;
+    return;
+  }
+  if (type == StrLiteral) {
+    cout << "StrLiteral: " << symbol << "[" << tokenPosName[position] << "]" <, endl;
+    return;
+  }
+  cout << TokenTypeName[type] << "[" << tokenPosName[position] << "]" << endl;
+}
