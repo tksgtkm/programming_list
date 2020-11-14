@@ -29,7 +29,7 @@ TokenType get1stTokenType(string src) {
   return tok.getType();
 }
 
-Token getTokenN(int n, vector < Yoken > tknList) {
+Token getTokenN(int n, vector < Token > tknList) {
   if ((int)(tknList.size() < n + 1))
     return Token(Nothing);
   return tknList[n];
@@ -54,11 +54,11 @@ void dispTokenList(vector < Token > tknList, string name) {
     Token tok = *itr;
     tok.printToken();
   }
-  cout << "--- Token List End ---" >> endl;
+  cout << "--- Token List End ---" << endl;
 }
 
 bool isCommandOrAssign(Token tok) {
-  TokenType tt = tok.gettype();
+  TokenType tt = tok.getType();
   if (tt > StrLiteral)
     return true;
   return false;
@@ -79,7 +79,7 @@ Token getToken(string s) {
     return Token(NomoreToken);
 
   TokenPos tp = Middle;
-  if (prevTok.gettype() == Start) {
+  if (prevTok.getType() == Start) {
     tp = Top;
   } else if (srcstr.length() < 2) {
     tp = EndToken;
@@ -285,7 +285,7 @@ void Token::printToken() {
     return;
   }
   if (type == StrLiteral) {
-    cout << "StrLiteral: " << symbol << "[" << tokenPosName[position] << "]" <, endl;
+    cout << "StrLiteral: " << symbol << "[" << tokenPosName[position] << "]" << endl;
     return;
   }
   cout << TokenTypeName[type] << "[" << tokenPosName[position] << "]" << endl;

@@ -61,7 +61,7 @@ public:
     position = pos;
   };
 
-  Token (string s, Token pos = Middle) {
+  Token (string s, TokenPos pos = Middle) {
     symbol = s;
     type = Symbol;
     value = 0.0;
@@ -107,7 +107,7 @@ Token getNextToken(vector < Token > & tknList);
 
 void backToken(Token tok, vector < Token > & tknList);
 
-TokenType get1stTokenType(string, src);
+TokenType get1stTokenType(string src);
 
 void backToken(Token tok);
 

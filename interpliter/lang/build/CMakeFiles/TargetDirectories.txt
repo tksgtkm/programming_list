@@ -1,0 +1,4 @@
+/home/onimas/computer_science/interpliter/lang/build/CMakeFiles/rebuild_cache.dir
+/home/onimas/computer_science/interpliter/lang/build/CMakeFiles/owl_sub.dir
+/home/onimas/computer_science/interpliter/lang/build/CMakeFiles/edit_cache.dir
+/home/onimas/computer_science/interpliter/lang/build/CMakeFiles/owl_lang.dir

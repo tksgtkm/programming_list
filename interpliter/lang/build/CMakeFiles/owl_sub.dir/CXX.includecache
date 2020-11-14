@@ -1,0 +1,42 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/onimas/computer_science/interpliter/lang/gettoken.cc
+vector
+-
+gettoken.h
+/home/onimas/computer_science/interpliter/lang/gettoken.h
+util.h
+/home/onimas/computer_science/interpliter/lang/util.h
+
+/home/onimas/computer_science/interpliter/lang/gettoken.h
+iostream
+-
+algorithm
+-
+string
+-
+cctype
+-
+stack
+-
+
+/home/onimas/computer_science/interpliter/lang/util.h
+iostream
+-
+string
+-
+cstring
+-
+algorithm
+-
+cctype
+-
+iomanip
+-
+
