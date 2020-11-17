@@ -18,16 +18,6 @@ cctype
 stack
 -
 
-/home/onimas/computer_science/interpliter/lang/interpret.cc
-source.h
-/home/onimas/computer_science/interpliter/lang/source.h
-gettoken.h
-/home/onimas/computer_science/interpliter/lang/gettoken.h
-interpret.h
-/home/onimas/computer_science/interpliter/lang/interpret.h
-util.h
-/home/onimas/computer_science/interpliter/lang/util.h
-
 /home/onimas/computer_science/interpliter/lang/interpret.h
 iostream
 -
@@ -47,6 +37,18 @@ cctype
 -
 gettoken.h
 /home/onimas/computer_science/interpliter/lang/gettoken.h
+
+/home/onimas/computer_science/interpliter/lang/main.cc
+clocale
+-
+source.h
+/home/onimas/computer_science/interpliter/lang/source.h
+gettoken.h
+/home/onimas/computer_science/interpliter/lang/gettoken.h
+interpret.h
+/home/onimas/computer_science/interpliter/lang/interpret.h
+util.h
+/home/onimas/computer_science/interpliter/lang/util.h
 
 /home/onimas/computer_science/interpliter/lang/source.h
 iostream

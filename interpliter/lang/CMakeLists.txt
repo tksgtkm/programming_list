@@ -1,18 +1,18 @@
 
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
-project (owl_lang)
+project (owl_project)
 
 add_library(owl_sub
   SHARED
-    util.h
-    util.cc
-    gettoken.h
-    gettoken.cc
-    interpret.h
-    interpret.cc
     source.h
+    gettoken.h
+    util.h
+    interpret.h
     source.cc
+    gettoken.cc
+    util.cc
+    interpret.cc
 )
 
 add_executable(owl_lang main.cc)

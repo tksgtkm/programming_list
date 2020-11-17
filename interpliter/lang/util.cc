@@ -89,7 +89,7 @@ int isNumberString(string ss) {
   return 1;
 }
 
-bool isOperator(char c) {
+bool isOparator(char c) {
   if (c == '<' || c == '>')
     return true;
   if (c == '!')

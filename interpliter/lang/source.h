@@ -11,10 +11,10 @@
 
 using namespace std;
 
-extern vector < string > sourceList;
+extern vector < string > SourceList;
 extern int CurrentLine;
 
-int loadSourceFile(string, cmdline);
-coid dispSourceFile();
+int loadSourceFile(string cmdline);
+void dispSourceFile();
 
 #endif

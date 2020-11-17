@@ -57,18 +57,18 @@ include CMakeFiles/owl_sub.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/owl_sub.dir/flags.make
 
-CMakeFiles/owl_sub.dir/util.cc.o: CMakeFiles/owl_sub.dir/flags.make
-CMakeFiles/owl_sub.dir/util.cc.o: ../util.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/onimas/computer_science/interpliter/lang/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/owl_sub.dir/util.cc.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/owl_sub.dir/util.cc.o -c /home/onimas/computer_science/interpliter/lang/util.cc
+CMakeFiles/owl_sub.dir/source.cc.o: CMakeFiles/owl_sub.dir/flags.make
+CMakeFiles/owl_sub.dir/source.cc.o: ../source.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/onimas/computer_science/interpliter/lang/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/owl_sub.dir/source.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/owl_sub.dir/source.cc.o -c /home/onimas/computer_science/interpliter/lang/source.cc
 
-CMakeFiles/owl_sub.dir/util.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/owl_sub.dir/util.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/onimas/computer_science/interpliter/lang/util.cc > CMakeFiles/owl_sub.dir/util.cc.i
+CMakeFiles/owl_sub.dir/source.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/owl_sub.dir/source.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/onimas/computer_science/interpliter/lang/source.cc > CMakeFiles/owl_sub.dir/source.cc.i
 
-CMakeFiles/owl_sub.dir/util.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/owl_sub.dir/util.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/onimas/computer_science/interpliter/lang/util.cc -o CMakeFiles/owl_sub.dir/util.cc.s
+CMakeFiles/owl_sub.dir/source.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/owl_sub.dir/source.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/onimas/computer_science/interpliter/lang/source.cc -o CMakeFiles/owl_sub.dir/source.cc.s
 
 CMakeFiles/owl_sub.dir/gettoken.cc.o: CMakeFiles/owl_sub.dir/flags.make
 CMakeFiles/owl_sub.dir/gettoken.cc.o: ../gettoken.cc
@@ -83,9 +83,22 @@ CMakeFiles/owl_sub.dir/gettoken.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/owl_sub.dir/gettoken.cc.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/onimas/computer_science/interpliter/lang/gettoken.cc -o CMakeFiles/owl_sub.dir/gettoken.cc.s
 
+CMakeFiles/owl_sub.dir/util.cc.o: CMakeFiles/owl_sub.dir/flags.make
+CMakeFiles/owl_sub.dir/util.cc.o: ../util.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/onimas/computer_science/interpliter/lang/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/owl_sub.dir/util.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/owl_sub.dir/util.cc.o -c /home/onimas/computer_science/interpliter/lang/util.cc
+
+CMakeFiles/owl_sub.dir/util.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/owl_sub.dir/util.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/onimas/computer_science/interpliter/lang/util.cc > CMakeFiles/owl_sub.dir/util.cc.i
+
+CMakeFiles/owl_sub.dir/util.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/owl_sub.dir/util.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/onimas/computer_science/interpliter/lang/util.cc -o CMakeFiles/owl_sub.dir/util.cc.s
+
 CMakeFiles/owl_sub.dir/interpret.cc.o: CMakeFiles/owl_sub.dir/flags.make
 CMakeFiles/owl_sub.dir/interpret.cc.o: ../interpret.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/onimas/computer_science/interpliter/lang/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/owl_sub.dir/interpret.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/onimas/computer_science/interpliter/lang/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/owl_sub.dir/interpret.cc.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/owl_sub.dir/interpret.cc.o -c /home/onimas/computer_science/interpliter/lang/interpret.cc
 
 CMakeFiles/owl_sub.dir/interpret.cc.i: cmake_force
@@ -96,33 +109,20 @@ CMakeFiles/owl_sub.dir/interpret.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/owl_sub.dir/interpret.cc.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/onimas/computer_science/interpliter/lang/interpret.cc -o CMakeFiles/owl_sub.dir/interpret.cc.s
 
-CMakeFiles/owl_sub.dir/source.cc.o: CMakeFiles/owl_sub.dir/flags.make
-CMakeFiles/owl_sub.dir/source.cc.o: ../source.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/onimas/computer_science/interpliter/lang/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/owl_sub.dir/source.cc.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/owl_sub.dir/source.cc.o -c /home/onimas/computer_science/interpliter/lang/source.cc
-
-CMakeFiles/owl_sub.dir/source.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/owl_sub.dir/source.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/onimas/computer_science/interpliter/lang/source.cc > CMakeFiles/owl_sub.dir/source.cc.i
-
-CMakeFiles/owl_sub.dir/source.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/owl_sub.dir/source.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/onimas/computer_science/interpliter/lang/source.cc -o CMakeFiles/owl_sub.dir/source.cc.s
-
 # Object files for target owl_sub
 owl_sub_OBJECTS = \
-"CMakeFiles/owl_sub.dir/util.cc.o" \
+"CMakeFiles/owl_sub.dir/source.cc.o" \
 "CMakeFiles/owl_sub.dir/gettoken.cc.o" \
-"CMakeFiles/owl_sub.dir/interpret.cc.o" \
-"CMakeFiles/owl_sub.dir/source.cc.o"
+"CMakeFiles/owl_sub.dir/util.cc.o" \
+"CMakeFiles/owl_sub.dir/interpret.cc.o"
 
 # External object files for target owl_sub
 owl_sub_EXTERNAL_OBJECTS =
 
-libowl_sub.so: CMakeFiles/owl_sub.dir/util.cc.o
-libowl_sub.so: CMakeFiles/owl_sub.dir/gettoken.cc.o
-libowl_sub.so: CMakeFiles/owl_sub.dir/interpret.cc.o
 libowl_sub.so: CMakeFiles/owl_sub.dir/source.cc.o
+libowl_sub.so: CMakeFiles/owl_sub.dir/gettoken.cc.o
+libowl_sub.so: CMakeFiles/owl_sub.dir/util.cc.o
+libowl_sub.so: CMakeFiles/owl_sub.dir/interpret.cc.o
 libowl_sub.so: CMakeFiles/owl_sub.dir/build.make
 libowl_sub.so: CMakeFiles/owl_sub.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/onimas/computer_science/interpliter/lang/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX shared library libowl_sub.so"

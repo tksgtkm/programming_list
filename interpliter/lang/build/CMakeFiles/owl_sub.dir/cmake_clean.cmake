@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/owl_sub.dir/util.cc.o"
-  "CMakeFiles/owl_sub.dir/gettoken.cc.o"
-  "CMakeFiles/owl_sub.dir/interpret.cc.o"
   "CMakeFiles/owl_sub.dir/source.cc.o"
+  "CMakeFiles/owl_sub.dir/gettoken.cc.o"
+  "CMakeFiles/owl_sub.dir/util.cc.o"
+  "CMakeFiles/owl_sub.dir/interpret.cc.o"
   "libowl_sub.pdb"
   "libowl_sub.so"
 )

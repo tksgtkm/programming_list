@@ -9,7 +9,7 @@ vector < string > SourceList;
 
 int CurrentLine;
 
-int loadSourceFile(string, cmdline) {
+int loadSourceFile(string cmdline) {
   char buff[MAX_LINE_LENGTH];
   strcpy(buff, cmdline.c_str());
   char seps[12] = " ,\t\n";
@@ -38,7 +38,7 @@ int loadSourceFile(string, cmdline) {
     removeLastCRLF(buff);
     string s = string(buff);
     if (s.length() > 0) {
-      sourceList.push_back(s);
+      SourceList.push_back(s);
       lines += 1;
     }
   }

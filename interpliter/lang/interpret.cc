@@ -7,6 +7,8 @@
 using namespace std;
 
 map <string, double> varmap;
+stack < Token > Stck;
+stack < Token > OpStck;
 
 static Token checkAndRegisterVar(Token token0) {
   string symbol = token0.getSymbol();
@@ -22,134 +24,143 @@ static Token checkAndRegisterVar(Token token0) {
 }
 
 Token expression(vector < Token > tknList) {
-  stack < Token > exstck;
-  stack < Token > exopstck;
+    stack < Token > exstck;          // 数値スタック
+    stack < Token > exopstck;        // 演算子スタック
 
-  while(true) {
-    if (DispStack) {
-      printstack(exstck, "exstck");
-      printstack(exopstck, "exopstck");
-    }
-    if (DispToken)
-      dispTokenList(tknList, "tknList");
+    while ( true ) {
+        if (DispStack){
+            printstack(exstck, "exstck");
+            printstack(exopstck, "exopstck");
+        }
+        if (DispToken)
+            dispTokenList( tknList, "tknList" );
 
-    Token currentToken = getNextToken(tknList);
-    TokenType ctt = currentToken.getType();
-    string csm = currentToken.getSymbol();
-    if (ctt == Symbol && csm[0] == '-') {
-      string tmpsymbol = csm.substr(1, csm.length()-1);
-      Token tmpToken = Token(Symbol, tmpsymbol, Top);
-      tmpToken = checkAndRegisterVar(tmpToken);
-      double v = tmpToken.getValue();
-      currentToken = Token(-1*v);
-      ctt = Value;
-    }
+        Token currentToken = getNextToken(tknList); // 最初のトークン
+        TokenType ctt = currentToken.getType();
+        string csm = currentToken.getSymbol();
+        if (ctt == Symbol && csm[0] == '-') {   // -とシンボル
+            string tmpsymbol = csm.substr(1, csm.length()-1); // 先頭の'-'を除いたシンボル
+            Token tmpToken = Token(Symbol, tmpsymbol, Top);
+            tmpToken = checkAndRegisterVar(tmpToken);
+            double v = tmpToken.getValue();
+            currentToken = Token( -1 * v );
+            ctt = Value;
+        }
+        if (ctt == Symbol) {    // シンボル
+            // 変数とみなす
+            currentToken = checkAndRegisterVar(currentToken);
+            ctt = currentToken.getType();
+        }
 
-    if (ctt == Symbol) {
-      currentToken = checkAndRegisterVar(currentToken);
-      ctt = currentToken.getType();
-    }
+        if ( ctt == NomoreToken ) {       // もうデータはない
+            // opスタックが0個になるか、=に遭遇するまで演算を続ける
+            Token optoken = getTopElem( exopstck );
+            TokenType optt = optoken.getType();
+            if ( optt == NomoreToken || optt == Assign) {
+                exopstck.push(optoken);
+                return exstck.top();
+            }
 
-    if (ctt == NomoreToken) {
-      Token optoken = getTopElem(exopstck);
-      TokenType optt = optoken.getType();
-      if (optt == NomoreToken || optt == Assign) {
-        exopstck.push(optoken);
-        return exstck.top();
-      }
-      currentToken = getTopElem(exstck);
-      ctt = currentToken.gettype();
-      exopstck.push(optoken);
-    }
-    if ((RParen < ctt) && (ctt < Smaller)) {
-      exopstck.push(currentToken);
-      continue;
-    }
-    if (ctt == LParen) {
-      int nLRaren = 1;
-      vector < Token > tmpTokenList;
-      while(true) {
-        Token tok = getNextToken(tknList);
-        TokenType tt = tok.getType();
-        if (tt == LParen) {
-          nLRaren += 1;
+            currentToken = getTopElem( exstck );
+            ctt = currentToken.getType();
+            exopstck.push(optoken);
         }
-        if (tt == RParen) {
-          if (--nLRaren == 0) {
-            break;
-          }
-        }
-        if (tt == NomoreToken)
-          return syntaxError("右括弧がありませんwww");
-        tmpTokenList.insert(tmpTokenList.end(), tok);
-      }
-      if (tmpTokenList.size() > 1) {
-        Token tok = expression(tmpTokenList);
-        tok.setType(Value);
-        tknList.insert(tknList.begin(), tok);
-        continue;
-      } else {
-        exstck.push(tmpTokenList[0].getValue());
-      }
-      continue;
-    }
-    if (Minus << ctt && ctt < Assign) {
-      exopstck.push(currentToken);
-      continue;
-    }
-    if (ctt == Value || ctt == Variable) {
-      Token tok = getTopElem(exstck);
-      Token optok = getTopElem(exopstck);
-      TokenType optokt = optok.getType();
-      if ((tok.gettype() == Value || tok.getType() == Variable) && Minus < optokt && optokt < Assign) {
-        double a = currentToken.getValue();
-        double b = tok.getValue();
-        exstck.push(a - b);
-        continue;
-      }
-      if ((tok.getType() == Value || tok.getType() == Variable) && (optok.getType() == Mult || optok.getType() == Divide)) {
-        double a = currentToken.getValue();
-        double b = tok.getValue();
-        if (optok.getType() == Mult) {
-          exstck.push(a * b);
-          continue;
-        }
-        if (optok.getType() == Divide) {
-          exstck.push(b / a);
-          continue;
-        }
-      }
-      if ((tok.gettype() == Value || tok.gettype() == Variable) && (optok.getType() == Plus || optok.getType() == Minus)) {
-        Token nexttoken = getNextToken(tknList);
-        TokenType ntt = nexttoken.getType();
-        if (ntt == Mult || ntt == Divide || ntt == RParen) {
-          exstck.push(tok);
-          exopstck.push(optok);
-          backToken(nexttoken, tknList);
-          exstck.push(currentToken);
-          continue;
-        } else {
-          double a = currentToken.getValue();
-          double b = tok.getValue();
-          backToken(nexttoken, tknList);
-          if (optok.getType() == Plus) {
-            exstck.push(a + b);
+        if ( (RParen < ctt) && (ctt < Smaller) ) {   // +,-,*,/ opスタックに積む
+            exopstck.push( currentToken );
             continue;
-          }
-          if (optok.getType() == Minus) {
-            exstck.push(b - a);
-            continue;
-          }
         }
-      }
-      if (tok.getType() != NomoreToken)
-        exstck.push(tok);
-      if (optok.getType() != NomoreToken)
-        exopstck.push(optok);
-      exstck.push(currentToken);
+        if (ctt == LParen) {// 左括弧(
+            int nLRaren = 1;
+            vector < Token > tmpTokenList;
+            while (true){
+                Token tok = getNextToken(tknList);
+                TokenType tt = tok.getType();
+                if ( tt == LParen) {
+                    nLRaren += 1;
+                }
+                if ( tt == RParen) {
+                    if ( --nLRaren == 0)
+                        break;
+                }
+                if ( tt == NomoreToken)
+                    return syntaxError("右括弧がありません。");
+                tmpTokenList.insert(tmpTokenList.end(), tok);
+            }
+            if (tmpTokenList.size() > 1) {
+                Token tok = expression(tmpTokenList);
+                tok.setType( Value );
+                tknList.insert( tknList.begin(), tok );
+                continue;
+            } else
+                exstck.push( tmpTokenList[0].getValue() );
+            continue;
+        }
+        if ( Minus < ctt && ctt < Assign ) {  // <,>,==,!=
+            exopstck.push( currentToken );
+            continue;
+        }
+        if ( ctt == Value || ctt == Variable) {         // 数値
+            Token tok = getTopElem( exstck );
+            Token optok = getTopElem( exopstck );
+            TokenType optokt = optok.getType();
+            // <, >, ==, !=
+            if ( (tok.getType() == Value || tok.getType() == Variable) &&
+                Minus < optokt  && optokt < Assign) {
+                double a = currentToken.getValue();
+                double b = tok.getValue();
+                exstck.push( a - b);
+                continue;
+            }
+            // *, /
+            if ( (tok.getType() == Value || tok.getType() == Variable) &&
+                ( optok.getType() == Mult || optok.getType() == Divide )) {
+                double a = currentToken.getValue();
+                double b = tok.getValue();
+                if ( optok.getType() == Mult){
+                    exstck.push( a * b);
+                    continue;
+                }
+                if ( optok.getType() == Divide ) {
+                    exstck.push( b / a);
+                    continue;
+                }
+            }
+            // +, -
+            if ( (tok.getType() == Value || tok.getType() == Variable) &&
+                ( optok.getType() == Plus || optok.getType() == Minus )) {
+                // 次のトークン
+                Token nexttoken = getNextToken(tknList);
+                // 演算子*か/か)である場合は、数をスタックに積むだけでなにもしない
+                TokenType ntt = nexttoken.getType();
+                if ( ntt == Mult || ntt == Divide || ntt == RParen ) {
+                    exstck.push( tok );
+                    exopstck.push( optok );
+                    backToken( nexttoken, tknList );
+                    exstck.push( currentToken );
+                    continue;
+                } else { // そうでなければ、計算を行い、結果をスタックに保存する。
+                    double a = currentToken.getValue();
+                    double b = tok.getValue();
+                    backToken( nexttoken, tknList );
+                    if ( optok.getType() == Plus){
+                        exstck.push( a + b);
+                        continue;
+                    }
+                    if ( optok.getType() == Minus ) {
+                       exstck.push( b - a);
+                       continue;
+                    }
+                }
+            }
+            if ( tok.getType() != NomoreToken)
+                exstck.push( tok );     // スタックをもとに戻し
+            if ( optok.getType() != NomoreToken)
+                exopstck.push( optok );
+            exstck.push ( currentToken ); // 数値をスタックに積む
+        }
     }
-  }
-  return (Token(Invalid));
+
+    return (Token( Invalid ));
 }
 
 Token strexpression(vector < Token > tknList) {
@@ -189,7 +200,7 @@ Token strexpression(vector < Token > tknList) {
       continue;
     }
   }
-  return token(Invalid);
+  return Token(Invalid);
 }
 
 static int callCount = 0;
@@ -230,7 +241,7 @@ int doCallStatement() {
   while (true) {
     src = SourceList[invokedLine];
     int n = getTokenList(src, TokenList);
-    if (getNextToken(TokenList).getType() == sub) {
+    if (getNextToken(TokenList).getType() == Sub) {
       if (n < 2)
         return syntaxError("サブルーチンが見つかりません。");
       string symbol = getNextToken(TokenList).getSymbol();
@@ -268,7 +279,7 @@ int doCallStatement() {
       varmap[symbol] = parameterList[0];
       if (parameterList.size() < 1)
         return syntaxError("実引数と仮引数の数が一致しません。");
-      parameterList.earse(parameterList.begin());
+      parameterList.erase(parameterList.begin());
     }
   }
 
@@ -365,7 +376,7 @@ int doIfStatement() {
   Token optok;
   Token tok = getNextToken(TokenList);
   double exp = 0.0;
-  vector < Token > ExTokenList;
+  vector < Token > exTokenList;
   while (true) {
     tok = getNextToken(TokenList);
     TokenType tt = tok.getType();
@@ -381,7 +392,6 @@ int doIfStatement() {
     exp = expression(exTokenList).getValue();
   else
     return syntaxError("条件式が不正です。");
-
   TokenType optt = optok.getType();
   bool bResult = true;
   if (optt == Greater && exp > 0.0)
@@ -475,122 +485,124 @@ int doAssign() {
 }
 
 int execSrcLine(string sourceline) {
-  string line = trim(sourceline);
-  if (line.length() < 1)
-    return 1;
-  if (DispLine)
-    cout << line << "を実効" << endl;
-  if (line.length() > 1 && line[0] == '/' && line[1] == '/')
+    string line = trim(sourceline);
+    if (line.length() < 1)
+        return 1;
+    if (DispLine)
+        cout << line << "を実行" << endl;
+    if (line.length()> 1 && line[0] == '/' && line[1] == '/')
+        return 0;
+    getTokenList(line, TokenList);
+
+    if ( DispToken )
+        dispTokenList( TokenList, "TokenList" );
+
+    Token token0 = getTokenN(0, TokenList);
+    TokenType tt0 = token0.getType();
+    if ( tt0 == Nothing )
+        return -1;
+    if ( tt0 == End )
+        return 1;
+
+    if ( tt0 == Symbol ) {
+        string symbol = token0.getSymbol();
+        if ( compareIgnCase(symbol, "printvar") ) {
+                printvarmap();
+                return 0;
+            }
+            if ( compareIgnCase(symbol, "printstack") ) {
+                printstack( Stck, "Stck" );
+                printstack( OpStck, "OpStck" );
+                return 0;
+            }
+            if ( compareIgnCase(symbol, "list") ) {
+                dispSourceFile();
+                return 0;
+            }
+            if ( compareIgnCase(symbol, "DispStack") || compareIgnCase(symbol, "ds") ) {
+                DispStack = !DispStack;
+                cout << ( DispStack ? "DispStack on" : "DispStack off") << endl;
+                return 0;
+            }
+            if ( compareIgnCase(symbol, "DispToken") || compareIgnCase(symbol, "dt")) {
+                DispToken = !DispToken;
+                cout << ( DispToken ? "DispToken on" : "DispToken off") << endl;
+                return 0;
+            }
+            if ( compareIgnCase(symbol, "DispLine") || compareIgnCase(symbol, "dl")) {
+                DispLine = !DispLine;
+                cout << ( DispLine ? "DispLine on" : "DispLine off") << endl;
+                return 0;
+            }
+    }
+
+    Token token1 = getTokenN(1, TokenList);
+    TokenType tt1 = token1.getType();
+    if ( tt1 == Nothing ) {
+        if (token0.getType() == Value) {
+            cout << token0.getValue() << endl;
+            return 0;
+        } else {
+            vector < Token > exTokenList;
+            bool fStrLiteral = false;
+            Token tok = getNextToken( TokenList );
+            exTokenList.insert(exTokenList.end(), tok);
+            if (tok.getType() == StrLiteral)
+                Stck.push( strexpression(exTokenList) );
+            else
+                Stck.push( expression(exTokenList) );
+        }
+    } else {
+        cout << tt0 << endl;
+        if (tt0 == If ) {
+            if (doIfStatement())
+                return -1;
+            return 0;
+        } else if (tt0 == Call ) {
+            if (doCallStatement())
+                return -1;
+            return 0;
+        } else if (tt0 == For ) {
+            if (doForStatement())
+                return -1;
+            return 0;
+        } else if (tt1 == Assign ) {
+            doAssign();
+            return 0;
+        } else {
+            vector < Token > exTokenList;
+            bool fStrLiteral = false;
+            while (true){
+                Token tok = getNextToken( TokenList );
+                if (tok.getType() == Print || tok.getType() == Println )
+                    continue;
+                if (tok.getType() == NomoreToken )
+                    break;
+                if (tok.getType() == StrLiteral )
+                    fStrLiteral = true;
+                exTokenList.insert(exTokenList.end(), tok);
+            }
+            if (exTokenList.size() > 0) {
+                if (fStrLiteral)
+                    Stck.push( strexpression(exTokenList) );
+                else
+                    Stck.push( expression(exTokenList) );
+            } else {
+                if (fStrLiteral)
+                    Stck.push( exTokenList[0] );
+                else
+                    Stck.push( exTokenList[0].getValue() );
+            }
+        }
+    }
+    if ( tt0 == Print )
+        printTokenValOrLiteral(Stck.top());
+    if ( tt0 == Println )
+        printTokenValOrLiteral(Stck.top(), true);
+    if ( fDirectMode == true && tt0 != Print && tt0 != Println )
+        printTokenValOrLiteral(Stck.top(), true);
+
     return 0;
-  getTokenList(line, TokenList);
-
-  if (DispToken)
-    dispTokenList(TokenList, "TokenList");
-
-  Token token0 = getTokenN(0, TokenList);
-  TokenType tt0 = token0.getType();
-  if (tt0 == Nothing)
-    return -1;
-  if (tt0 == End)
-    return 1;
-
-  if (tt0 == Symbol) {
-    string symbol = token0.getSymbol();
-    if (compareIgnCase(symbol, "printvar")) {
-      printvarmap();
-      return 0;
-    }
-    if (compareIgnCase(symbol, "printstack")) {
-      printstack(Stck, "Stck");
-      printstack(OpStck, "OpStck");
-      return 0;
-    }
-    if (compareIgnCase(symbol, "list")) {
-      dispSourceFile();
-      return 0;
-    }
-    if (compareIgnCase(symbol, "DispStack") || compareIgnCase(symbol, "ds")) {
-      DispStack = !DispStack;
-      cout << (DispStack ? "DispStack on" : "DispStack off") << endl;
-      return 0;
-    }
-    if (compareIgnCase(symbol, "DispToken") || compareIgnCase(symbol, "dt")) {
-      DispToken = !DispToken;
-      cout << (DispToken ? "DispToken on" : "DispToken off") << endl;
-      return 0;
-    }
-    if (compareIgnCase(symbol, "DispLine") || compareIgnCase(symbol, "dl")) {
-      DispLine = !DispLine;
-      cout << (DispLine ? "DispLine on" : "DispLine off") << endl;
-      return 0;
-    }
-  }
-
-  Token token1 = getTokenN(1, TokenList);
-  TokenType tt1 = token1.getType();
-  if (tt1 == Nothing) {
-    if (token0.getType() == Value) {
-      cout << token0.getValue() << endl;
-      return 0;
-    } else {
-      vector < Token > exTokenList;
-      bool fStrLiteral = false;
-      Token tok = getNextToken(TokenList);
-      exTokenList.insert(exTokenList.end(), tok);
-      if (tok.getType() == StrLiteral)
-        Stck.push(strexpression(exTokenList));
-      else
-        Stck.push(expression(exTokenList));
-    }
-  } else {
-    if (tt0 == If) {
-      if (doIfStatement())
-        return -1;
-      return 0;
-    } else if (tt0 == Call) {
-      if (doCallStatement())
-        return -1;
-      return 0;
-    } else if (tt0 == For) {
-      if (doForStatement())
-        return -1;
-      return 0;
-    } else if (tt1 == Assign) {
-      doAssign();
-      return 0;
-    } else {
-      vector < Token > exTokenList;
-      bool fStrLiteral = false;
-      while (true) {
-        Token tok = getNextToken(tokenList);
-        if (tok.getType() == Print || tok.getType() == Println)
-          continue;
-        if (tok.getType() == NomoreToken)
-          break;
-        if (tok.getType() == StrLiteral)
-          fStrLiteral = true;
-        exTokenList.insert(exTokenList.end(), tok);
-      }
-      if (exTokenList.size() > 0) {
-        if (fStrLiteral)
-          Stck.push(strexpression(exTokenList));
-        else
-          Stck.push(expression(exTokenList));
-      } else {
-        if (fStrLiteral)
-          Stck.push(exTokenList[0]);
-        else
-          Stck.push(exTokenList[0].getValue());
-      }
-    }
-  }
-  if (tt0 == Print)
-    printTokenValOrLiteral(Stck.top());
-  if (tt0 == Println)
-    printTokenValOrLiteral(Stck.top(), true);
-  if (fDirectMode == true && tt0 != Print && tt0 != Println)
-    printTokenValOrLiteral(Stck.top(), true);
-  return 0;
 }
 
 int statement(string statementLine) {

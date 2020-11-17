@@ -139,7 +139,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=owl_lang
+CMAKE_PROJECT_NAME:STATIC=owl_project
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
@@ -201,10 +201,10 @@ CMAKE_STRIP:FILEPATH=/usr/bin/strip
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
 //Value Computed by CMake
-owl_lang_BINARY_DIR:STATIC=/home/onimas/computer_science/interpliter/lang/build
+owl_project_BINARY_DIR:STATIC=/home/onimas/computer_science/interpliter/lang/build
 
 //Value Computed by CMake
-owl_lang_SOURCE_DIR:STATIC=/home/onimas/computer_science/interpliter/lang
+owl_project_SOURCE_DIR:STATIC=/home/onimas/computer_science/interpliter/lang
 
 
 ########################

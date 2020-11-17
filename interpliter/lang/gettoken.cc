@@ -23,8 +23,8 @@ void backToken(Token tok, vector < Token > & tknList) {
 
 TokenType get1stTokenType(string src) {
   vector < Token > tokenList;
-  if (getTokenList(src, tokenList) < 1)
-    return Invalid;
+  if (getTokenList(src, tokenList) < 1)  // トークンのリストを取得する
+      return Invalid;
   Token tok = getTokenN(0, tokenList);
   return tok.getType();
 }
@@ -96,7 +96,7 @@ Token getToken(string s) {
   }
   if (c1 == '!' && c2 == '=') {
     srcstr = srcstr.substr(2, srcstr.length() - 2);
-    return Token(NoeEqual, tp);
+    return Token(NotEqual, tp);
   }
   if (c1 == '-' && !(prevTok.isStartToken())) {
     srcstr = srcstr.substr(1, srcstr.length() - 1);
@@ -139,7 +139,7 @@ Token getToken(string s) {
     return Token(Comma, tp);
   }
 
-  if (c1 == '=' && isalpha(c2)) {
+  if (c1 == '-' && isalpha(c2)) {
     tokenstr = c1;
     while (true) {
       if ((int)(srcstr.length()) == pos) {
@@ -148,7 +148,7 @@ Token getToken(string s) {
         break;
       }
       char c = srcstr[pos++];
-      if (c == ' ' || isOperator(c) || isParen(c) || c == ',') {
+      if (c == ' ' || isOparator(c) || isParen(c) || c == ',') {
         --pos;
         int len = srcstr.length() - pos;
         srcstr = srcstr.substr(pos, len);
@@ -201,7 +201,7 @@ Token getToken(string s) {
         tokenstr += c;
       }
     } else {
-      if (c == ' ' || isOperator(c) || isParen(c) || c == ',') {
+      if (c == ' ' || isOparator(c) || isParen(c) || c == ',') {
         --pos;
         int len = srcstr.length() - pos;
         srcstr = srcstr.substr(pos, len);
@@ -252,7 +252,7 @@ bool Token::isStartToken() {
     return true;
   if (type == Comma)
     return true;
-  retrn false;
+  return  false;
 }
 
 void printTokenValOrLiteral(Token tt, bool crlf) {

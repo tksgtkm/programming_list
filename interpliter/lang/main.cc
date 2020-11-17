@@ -7,13 +7,13 @@
 
 using namespace std;
 
-bool DispToken = false;
-bool DispStack = false;
-bool DispLine = false;
-bool fDirectMode = false;
+bool DispToken = false; // trueでトークンを表示する
+bool DispStack = false; // trueでスタックを表示する
+bool DispLine = false; // trueで行を表示する
+bool fDirectMode = false; // trueで直接実行モード
 
 void initRun();
-void iniLoad();
+void initLoad();
 
 int main(int argc, char *argv[]) {
 
@@ -74,12 +74,12 @@ int main(int argc, char *argv[]) {
     }
 
     if (compareIgnCase(s, "run")) {
-      if (sourceList.size() < 1) {
+      if (SourceList.size() < 1) {
         cout << "プログラムをロードしてください。" << endl;
         continue;
       }
       initRun();
-      statement();
+          statement();
       continue;
     }
 
@@ -95,7 +95,7 @@ void initLoad() {
   DispLine = false;
 }
 
-voir initRun() {
+void initRun() {
   CurrentLine = 0;
   varmap.clear();
   fDirectMode = false;
