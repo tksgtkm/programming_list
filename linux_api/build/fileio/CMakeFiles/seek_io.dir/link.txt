@@ -1,1 +1,0 @@
-/usr/bin/cc    CMakeFiles/seek_io.dir/seek_io.c.o  -o ../bin/seek_io ../lib/liblib.a 

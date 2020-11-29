@@ -1,1 +1,0 @@
-/usr/bin/cc    CMakeFiles/atomic_append.dir/atomic_append.c.o  -o ../bin/atomic_append ../lib/liblib.a 

@@ -1,1 +1,0 @@
-/usr/bin/cc    CMakeFiles/t_readv.dir/t_readv.c.o  -o ../bin/t_readv ../lib/liblib.a 

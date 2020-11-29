@@ -1,1 +1,0 @@
-/usr/bin/cc    CMakeFiles/error_functions.dir/error_functions.c.o  -o ../bin/error_functions liblib.a 

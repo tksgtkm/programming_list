@@ -1,2 +1,0 @@
-/usr/bin/ar qc liblib.a  CMakeFiles/lib.dir/error_functions.c.o CMakeFiles/lib.dir/get_num.c.o
-/usr/bin/ranlib liblib.a

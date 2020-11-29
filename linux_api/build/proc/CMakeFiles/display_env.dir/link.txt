@@ -1,1 +1,0 @@
-/usr/bin/cc    CMakeFiles/display_env.dir/display_env.c.o  -o ../bin/display_env ../lib/liblib.a 

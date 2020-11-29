@@ -1,1 +1,0 @@
-/usr/bin/cc    CMakeFiles/large_file.dir/large_file.c.o  -o ../bin/large_file ../lib/liblib.a 
