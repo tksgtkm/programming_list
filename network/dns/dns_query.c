@@ -50,8 +50,8 @@ void print_dns_message(const char *message, int msg_length) {
   switch(opcode) {
     case 0: printf("standard\n"); break;
     case 1: printf("reverse\n"); break;
-    case 2: printf("status\n",); break;
-    default printf("?\n"); break;
+    case 2: printf("status\n"); break;
+    default: printf("?\n"); break;
   }
 
   const int aa = (msg[2] & 0x04) >> 2;
@@ -99,7 +99,7 @@ void print_dns_message(const char *message, int msg_length) {
       }
 
       printf("Query %2d\n", i + 1);
-      printf(" name: ")
+      printf(" name: ");
 
       p = print_name(msg, p, end);
       printf("\n");
@@ -192,4 +192,106 @@ void print_dns_message(const char *message, int msg_length) {
     }
 
     printf("\n");
+}
+
+int main(int argc, char *argv[]) {
+
+  if (argc < 3) {
+    printf("Usage:\n\tdns_query hostname type\n");
+    printf("Example:\n\tdns_query example.com aaaa\n");
+    exit(0);
+  }
+
+  if (strlen(argv[1]) > 255) {
+    fprintf(stderr, "Hostname too long.");
+    exit(1);
+  }
+
+  unsigned char type;
+  if (strcmp(argv[2], "a") == 0) {
+    type = 1;
+  } else if (strcmp(argv[2], "mx") == 0) {
+    type = 15;
+  } else if (strcmp(argv[2], "txt") == 0) {
+    type = 16;
+  } else if (strcmp(argv[2], "aaaa") == 0) {
+    type = 255;
+  } else {
+    fprintf(stderr, "Unknown type '%s'. Use a, aaaa, txt, mx, or any.", argv[2]);
+    exit(1);
+  }
+
+#if defined(_WIN32)
+  WSADATA d;
+  if (WSAStartup(MAKEWORD(2, 2), &d)) {
+    fprintf(stderr, "Failed to initialize.\n");
+    return 1;
+  }
+#endif
+
+  printf("Confiuring remote address...\n");
+  struct addrinfo hints;
+  memset(&hints, 0, sizeof(hints));
+  hints.ai_socktype = SOCK_DGRAM;
+  struct addrinfo *peer_address;
+  if (getaddrinfo("8.8.8.8", "53", &hints, &peer_address)) {
+    fprintf(stderr, "getaddrinfo() failed. (%d)\n", GETSOCKETERRNO());
+    return 1;
+  }
+
+  printf("Creating socket...\n");
+  SOCKET socket_peer;
+  socket_peer = socket(peer_address->ai_family, peer_address->ai_socktype, peer_address->ai_protocol);
+  if (!ISVALIDSOCKET(socket_peer)) {
+    fprintf(stderr, "socket() failed. (%d)\n", GETSOCKETERRNO());
+    return 1;
+  }
+
+  char query[1024] = {0xAB, 0xCD,
+                      0x01, 0x00,
+                      0x00, 0x01,
+                      0x00, 0x00,
+                      0x00, 0x00,
+                      0x00, 0x00
+                    };
+  char *p = query + 12;
+  char *h = argv[1];
+
+  while(*h) {
+    char *len = p;
+    p++;
+    if (h != argv[1]) ++h;
+
+    while(*h && *h != '.') *p++ = *h++;
+    *len = p - len - 1;
+  }
+
+  *p++ = 0;
+  *p++ = 0x00; *p++ = type;
+  *p++ = 0x00; *p++ = 0x01;
+
+  const int query_size = p - query;
+
+  int bytes_sent = sendto(socket_peer, query, query_size, 0,
+                          peer_address->ai_addr, peer_address->ai_addrlen);
+  printf("Sent %d bytes.\n", bytes_sent);
+
+  print_dns_message(query, query_size);
+
+  char read[1024];
+  int bytes_received = recvfrom(socket_peer, read, 1024, 0, 0, 0);
+
+  printf("Received %d bytes.\n", bytes_received);
+
+  print_dns_message(read, bytes_received);
+  printf("\n");
+
+  freeaddrinfo(peer_address);
+  CLOSESOCKET(socket_peer);
+
+#if defined(_WIN32)
+  WSACleanup();
+#endif
+
+  return 0;
 }
