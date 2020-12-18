@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/onimas/C++/CPP_intro/cpp_practice/interpliter/main.cc
+iostream
+-
+stack
+-
+cmath
+-
+cstdlib
+-
+cctype
+-
+util.h
+/home/onimas/C++/CPP_intro/cpp_practice/interpliter/util.h
+
+/home/onimas/C++/CPP_intro/cpp_practice/interpliter/util.h
+algorithm
+-
+string
+-
+cctype
+-
+

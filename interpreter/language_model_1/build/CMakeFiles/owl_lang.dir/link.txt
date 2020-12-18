@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/owl_lang.dir/main.cc.o  -o owl_lang -Wl,-rpath,/home/onimas/computer_science/interpliter/lang/build libowl_sub.so 
