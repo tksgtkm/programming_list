@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/arr_ex.dir/array_exchange.cc.o  -o arr_ex 
