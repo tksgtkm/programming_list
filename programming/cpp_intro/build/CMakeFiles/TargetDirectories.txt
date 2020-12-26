@@ -1,8 +1,0 @@
-/home/anonymous/CS/programming_list/programming/cpp/build/CMakeFiles/edit_cache.dir
-/home/anonymous/CS/programming_list/programming/cpp/build/CMakeFiles/array2.dir
-/home/anonymous/CS/programming_list/programming/cpp/build/CMakeFiles/array.dir
-/home/anonymous/CS/programming_list/programming/cpp/build/CMakeFiles/array3.dir
-/home/anonymous/CS/programming_list/programming/cpp/build/CMakeFiles/arr_ex.dir
-/home/anonymous/CS/programming_list/programming/cpp/build/CMakeFiles/arr_cp.dir
-/home/anonymous/CS/programming_list/programming/cpp/build/CMakeFiles/rebuild_cache.dir
-/home/anonymous/CS/programming_list/programming/cpp/build/CMakeFiles/cc_ref.dir

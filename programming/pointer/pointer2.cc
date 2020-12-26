@@ -16,7 +16,7 @@ int main() {
 
   int* ptr;
   if (sw == 0) {
-    ptr  =&x;
+    ptr = &x;
   } else {
     ptr = &y;
   }

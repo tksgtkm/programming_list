@@ -1,1 +1,0 @@
-/usr/bin/c++     CMakeFiles/arr_cp.dir/array_copy.cc.o  -o arr_cp 

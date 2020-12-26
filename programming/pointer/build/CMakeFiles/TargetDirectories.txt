@@ -1,4 +1,0 @@
-/home/anonymous/CS/programming_list/programming/pointer/build/CMakeFiles/rebuild_cache.dir
-/home/anonymous/CS/programming_list/programming/pointer/build/CMakeFiles/edit_cache.dir
-/home/anonymous/CS/programming_list/programming/pointer/build/CMakeFiles/pointer.dir
-/home/anonymous/CS/programming_list/programming/pointer/build/CMakeFiles/pointer2.dir
