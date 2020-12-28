@@ -25,4 +25,16 @@ const char *get_content_type(const char* path) {
 SOCKET create_socket(const char* host, const char *port) {
   printf("Configuring local address...\n");
   struct addrinfo hints;
+  memset(&hints, 0, sizeof(hints));
+  hints.ai_family = AF_INET;
+  hints.ai_socktype = SOCK_STREAM;
+  hints.ai_flags = AI_PASSIVE;
+
+  struct addrinfo *bind_address;
+  getaddrinfo(host, port, &hints, &bind_address);
+
+  printf("Creating socket...\n");
+  SOCKET socket_listen;
+  socket_listen = socket(bind_adderss->ai_family, bind_address->ai_socktype, bind_address->ai_protocol);
+  
 }
