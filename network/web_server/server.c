@@ -35,7 +35,7 @@ SOCKET create_socket(const char* host, const char *port) {
 
   printf("Creating socket...\n");
   SOCKET socket_listen;
-  socket_listen = socket(bind_adderss->ai_family, bind_address->ai_socktype, bind_address->ai_protocol);
+  socket_listen = socket(bind_address->ai_family, bind_address->ai_socktype, bind_address->ai_protocol);
   if (!ISVALIDSOCKET(socket_listen)) {
     fprintf(stderr, "socket() failed. (%d)\n", GETSOCKETERRNO());
     exit(1);
@@ -101,7 +101,7 @@ void drop_client(struct client_info **client_list, struct client_info *client) {
       *p = client->next;
       free(client);
       return;
-
+    }
     p = &(*p)->next;
   }
   fprintf(stderr, "drop_client not found.\n");
@@ -155,7 +155,7 @@ void send_404(struct client_info **client_list, struct client_info *client) {
   drop_client(client_list, client);
 }
 
-void serve_resource(struct client_info **client_list, struct client_info **client, const char *path) {
+void serve_resource(struct client_info **client_list, struct client_info *client, const char *path) {
   printf("serve_resource %s %s\n", get_client_address(client), path);
 
   if (strcmp(path, "/") == 0) path = "/index.html";
@@ -181,7 +181,7 @@ void serve_resource(struct client_info **client_list, struct client_info **clien
   }
 #endif
 
-  FILE *fp = fopen(full_path);
+  FILE *fp = fopen(full_path, "rb");
 
   if (!fp) {
     send_404(client_list, client);
@@ -204,10 +204,10 @@ void serve_resource(struct client_info **client_list, struct client_info **clien
   sprintf(buffer, "Connection: close\r\n");
   send(client->socket, buffer, strlen(buffer), 0);
 
-  sprintf(buffer, "Content-Length: %u\r\n");
+  sprintf(buffer, "Content-Length: %lu\r\n", cl);
   send(client->socket, buffer, strlen(buffer), 0);
 
-  sprintf(buffer, "Content-Type: %s\r\n");
+  sprintf(buffer, "Content-Type: %s\r\n", ct);
   send(client->socket, buffer, strlen(buffer), 0);
 
   sprintf(buffer, "\r\n");
@@ -239,7 +239,7 @@ int main() {
 
   while(1) {
     fd_set reads;
-    reads = wait_on_client(&client_list, server);
+    reads = wait_on_clients(&client_list, server);
 
     if (FD_ISSET(server, &reads)) {
       struct client_info *client = get_client(&client_list, -1);
@@ -270,7 +270,8 @@ int main() {
                      MAX_REQUEST_SIZE - client->received, 0);
 
         if (r < 1) {
-          printf("Unexpected disconnect from %s.\n", get_client_address(&client_list, client));
+          printf("Unexpected disconnect from %s.\n", get_client_address(client));
+          drop_client(&client_list, client);
         } else {
           client->received += r;
           client->request[client->received] = 0;
@@ -304,6 +305,6 @@ int main() {
   WSACleanup();
 #endif
 
-  print("Finished.\n");
+  printf("Finished.\n");
   return 0;
 }
