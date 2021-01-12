@@ -1,7 +1,7 @@
 #include <stdarg.h>
 #include "error_functions.h"
 #include "api_hdr.h"
-#include "ename.c.inc"
+#include "ename.c.inc" /* ename及びMAX_ENAMEの定義 */
 
 #ifdef __GNUC__
 __attribute__ ((__noreturn__))
@@ -10,6 +10,10 @@ __attribute__ ((__noreturn__))
 static void terminate(Boolean useExit3) {
 
   char *s;
+
+  /* 環境変数EF_DUMPCOREを空文字以外に設定した場合はコアダンプファイルを生成する。
+  　　それ以外の場合はexit(3)または_exit(2)により終了する。
+  　　どちらを実行するかはuseExit3により決定する。 */
 
   s = getenv("EF_DUMPCORE");
 
@@ -42,8 +46,8 @@ static void outputError(Boolean useErr, int err, Boolean flushStdout, const char
   #pragma GCC diagnostic pop
 
     if (flushStdout)
-      fflush(stdout);
-    fputs(buf, stderr);
+      fflush(stdout); /* stdoutのフラッシュ */
+    fputs(buf, stderr); /* stderrが行バッファリング出ない場合に備える。 */
     fflush(stderr);
 }
 
@@ -51,7 +55,7 @@ void errMsg(const char *format, ...) {
   va_list argList;
   int savedErrno;
 
-  savedErrno = errno;
+  savedErrno = errno; /* 本関数がerrnoを上書きする恐れがあるため */
 
   va_start(argList, format);
   outputError(TRUE, errno, TRUE, format, argList);
@@ -110,7 +114,7 @@ void usageErr(const char *format, ...) {
   vfprintf(stderr, format, argList);
   va_end(argList);
 
-  fflush(stderr);
+  fflush(stderr); /* stderrが行バッファリング出ない場合に備える */
   exit(EXIT_FAILURE);
 }
 
@@ -124,6 +128,6 @@ void cmdLineErr(const char *format, ...) {
   vfprintf(stderr, format, argList);
   va_end(argList);
 
-  fflush(stderr);
+  fflush(stderr); /* stderrが行バッファリング出ない場合に備える */
   exit(EXIT_FAILURE);
 }
