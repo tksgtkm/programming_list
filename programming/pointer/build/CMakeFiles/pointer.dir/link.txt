@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/pointer.dir/pointer.cc.o  -o pointer 

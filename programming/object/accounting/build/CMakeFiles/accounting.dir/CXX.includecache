@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/anonymous/CS/programming_list/programming/object/accounting/accounting.cc
+string
+-
+iostream
+-
+accounting.h
+/home/anonymous/CS/programming_list/programming/object/accounting/accounting.h
+
+/home/anonymous/CS/programming_list/programming/object/accounting/accounting.h
+string
+-
+

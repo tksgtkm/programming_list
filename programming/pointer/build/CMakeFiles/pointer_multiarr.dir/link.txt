@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/pointer_multiarr.dir/pointer_multiarr.cc.o  -o pointer_multiarr 

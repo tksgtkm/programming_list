@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/ogject_gen.dir/object_gen.cc.o  -o ogject_gen 

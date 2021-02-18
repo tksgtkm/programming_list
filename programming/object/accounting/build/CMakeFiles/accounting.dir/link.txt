@@ -1,0 +1,2 @@
+/usr/bin/ar qc libaccounting.a  CMakeFiles/accounting.dir/accounting.cc.o
+/usr/bin/ranlib libaccounting.a
