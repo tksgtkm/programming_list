@@ -13,7 +13,7 @@ inline uint64_t rotl64 (uint64_t x, int8_t r) {
 #define ROTL32(x, y) rotl32(x, y)
 #define ROTL64(x, y) rotl64(x, y)
 
-#define BIG_CONSTANT(x) (x#LLU)
+#define BIG_CONSTANT(x) (x##LLU)
 
 FORCE_INLINE uint32_t getblock32(const uint32_t * p, int i) {
   return p[i];
@@ -43,7 +43,7 @@ FORCE_INLINE uint64_t fmix64(uint64_t k) {
 
 void hash_x86_32(const void * key, int len, uint32_t seed, void * out) {
   const uint8_t * data = (const uint8_t*)key;
-  const int nblockes = len / 4;
+  const int nblocks = len / 4;
   uint32_t h1 = seed;
   const uint32_t c1 = 0xcc9e2d51;
   const uint32_t c2 = 0x1b873593;
@@ -122,6 +122,11 @@ void hash_x86_128(const void * key, const int len, uint32_t seed, void * out) {
   }
 
   const uint8_t * tail = (const uint8_t*)(data + nblocks*16);
+
+  uint32_t k1 = 0;
+  uint32_t k2 = 0;
+  uint32_t k3 = 0;
+  uint32_t k4 = 0;
 
   switch(len & 15) {
     case 15: k4 ^= tail[14] << 16;

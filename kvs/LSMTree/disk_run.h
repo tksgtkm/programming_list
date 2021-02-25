@@ -23,7 +23,7 @@ using namespace std;
 
 template <class K, class V> class DiskLevel;
 
-template <class K, ckass V>
+template <class K, class V>
 
 class DiskRun {
   friend class DiskLevel<K, V>;
@@ -45,14 +45,14 @@ public:
   K minkey = INT_MIN;
   K maxkey = INT_MIN;
 
-  DiskRun<K, V> (unsigned long capacity, unsigned int page_size, int level, int runID, double bf_fp):_capacity(capacity),_level(level), _iMaxFP(0), pageSize(page_size), _runID(runID), _bf_fp(bf_fp), bf(capacity, bf_fp) {
+  DiskRun<K, V> (unsigned long capacity, unsigned int page_size, int level, int runID, double bf_fp):_capacity(capacity),_level(level), _imax_FP(0), page_size(page_size), _runID(runID), _bf_fp(bf_fp), bf(capacity, bf_fp) {
     _filename = "C_" + to_string(level) + "_" + to_string(runID) + ".txt";
 
     size_t filesize = capacity * sizeof(KVPair_t);
 
     long result;
 
-    fd = open(_filename.c_str(), O_RDWD | O_CREAT | O_TRUNC, (mode_t) 0600);
+    fd = open(_filename.c_str(), O_RDWR | O_CREAT | O_TRUNC, (mode_t) 0600);
     if (fd == -1) {
       perror("Error opening file for writing");
       exit(EXIT_FAILURE);
@@ -61,7 +61,7 @@ public:
     result = lseek(fd, filesize - 1, SEEK_SET);
     if (result == -1) {
       close(fd);
-      oerror("Error calling lseek() to 'stretch' the file");
+      perror("Error calling lseek() to 'stretch' the file");
       exit(EXIT_FAILURE);
     }
 
@@ -72,7 +72,7 @@ public:
       exit(EXIT_FAILURE);
     }
 
-    map = (KVPair<K, V>*) mmap(0, filesize, PORT_READ | PORT_WRITE, MAP_SHARED, fd, 0);
+    map = (KVPair<K, V>*) mmap(0, filesize, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
     if (map == MAP_FAILED) {
       close(fd);
       perror("Error mapping the file");
@@ -229,7 +229,7 @@ private:
 
   void do_map() {
     size_t filesize = _capacity*sizeof(KVPair_t);
-    fd = open(_filename.c_str(), O_RDWR | O_CREAT | C_TRUNC, (mode_t) 0600);
+    fd = open(_filename.c_str(), O_RDWR | O_CREAT | O_TRUNC, (mode_t) 0600);
     if (fd == -1) {
       perror("Error opening file for writing");
       exit(EXIT_FAILURE);
