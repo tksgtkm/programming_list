@@ -1,0 +1,2 @@
+/usr/bin/ar qc libdb_lib.a  CMakeFiles/db_lib.dir/btree.c.o
+/usr/bin/ranlib libdb_lib.a

@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/anonymous/CS/programming_list/kvs/hash_algorithm/hash.h
+stdbool.h
+-
+stdint.h
+-
+
+/home/anonymous/CS/programming_list/kvs/hash_algorithm/hash_test.c
+stdlib.h
+-
+stdio.h
+-
+hash.h
+/home/anonymous/CS/programming_list/kvs/hash_algorithm/hash.h
+

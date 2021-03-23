@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/anonymous/CS/programming_list/programming/hash/member.h
+
+/home/anonymous/CS/programming_list/programming/hash/open_hash.c
+stdio.h
+-
+stdlib.h
+-
+member.h
+/home/anonymous/CS/programming_list/programming/hash/member.h
+open_hash.h
+/home/anonymous/CS/programming_list/programming/hash/open_hash.h
+
+/home/anonymous/CS/programming_list/programming/hash/open_hash.h
+member.h
+/home/anonymous/CS/programming_list/programming/hash/member.h
+

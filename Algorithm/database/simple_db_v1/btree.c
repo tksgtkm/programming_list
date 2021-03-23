@@ -14,6 +14,24 @@
 #define leaf_key _u._leaf._leaf_key
 #define your_data _u._leaf._your_data
 
+struct node {
+  int nodekind;
+  union {
+    struct {
+      int _nchilds;
+      struct node *_child[MAX_CHILD];
+      KEY _low[MAX_CHILD];
+    } _internal;
+    struct {
+      KEY _leaf_key;
+      DATA _your_data;
+    } _leaf;
+  } _u;
+};
+
+node * root;
+
+
 error(char *s) {
   fprintf(stderr, s);
   exit(1);
@@ -44,7 +62,7 @@ int locate_subtree(NODE *p, KEY key) {
   return 0;
 }
 
-NODE *search(KEY key, NODE *root) {
+NODE *search(KEY key) {
   NODE *p;
   int i;
 
@@ -143,7 +161,7 @@ NODE *insert_aux(NODE **pnode, KEY key, NODE **newnode, KEY *lowest) {
   }
 }
 
-NODE *insert(KEY key, NODE *root) {
+NODE *insert(KEY key) {
   if (root == NULL) {
     root = alloc_node();
     root->nodekind = LEAF;
@@ -261,7 +279,7 @@ int delete_aux(NODE *node, KEY key, int *result) {
   }
 }
 
-int delete(KEY key, NODE *root) {
+int delete(KEY key) {
   int retv, result;
   NODE *p;
 
@@ -280,9 +298,8 @@ int delete(KEY key, NODE *root) {
   }
 }
 
-void print_tree(NODE *root) {
+void print_tree(NODE *p) {
   int i;
-  NODE *p;
 
   if (p->nodekind == LEAF) {
     printf("%04x leaf = val = %d\n", p, p->leaf_key);

@@ -8,25 +8,12 @@
 typedef int KEY;
 typedef int DATA;
 
-typedef struct node {
-  int nodekind;
-  union {
-    struct {
-      int _nchilds;
-      struct node *_child[MAX_CHILD];
-      KEY _low[MAX_CHILD];
-    } _internal;
-    struct {
-      KEY _leaf_key;
-      DATA _your_data;
-    } _leaf;
-  } _u;
-} NODE;
+typedef struct node NODE;
 
-extern NODE *search(KEY key, NODE *root);
+extern NODE *search(KEY key);
 
-extern NODE *insert(KEY key, NODE *root);
+extern NODE *insert(KEY key);
 
-extern int delete(KEY key, NODE *root);
+extern int delete(KEY key);
 
 extern void print_tree(NODE *p);
