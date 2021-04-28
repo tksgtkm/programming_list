@@ -1,4 +1,0 @@
-/home/anonymous/CS/programming_list/Algorithm/database/simple_db_v1/build/CMakeFiles/rebuild_cache.dir
-/home/anonymous/CS/programming_list/Algorithm/database/simple_db_v1/build/CMakeFiles/db_lib.dir
-/home/anonymous/CS/programming_list/Algorithm/database/simple_db_v1/build/CMakeFiles/edit_cache.dir
-/home/anonymous/CS/programming_list/Algorithm/database/simple_db_v1/build/CMakeFiles/main.dir

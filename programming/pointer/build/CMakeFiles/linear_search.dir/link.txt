@@ -1,1 +1,0 @@
-/usr/bin/c++     CMakeFiles/linear_search.dir/linear_search.cc.o  -o linear_search 

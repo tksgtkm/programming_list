@@ -1,4 +1,0 @@
-/home/anonymous/CS/programming_list/programming/object/oop_project/test/build/CMakeFiles/rebuild_cache.dir
-/home/anonymous/CS/programming_list/programming/object/oop_project/test/build/CMakeFiles/edit_cache.dir
-/home/anonymous/CS/programming_list/programming/object/oop_project/test/build/CMakeFiles/source.dir
-/home/anonymous/CS/programming_list/programming/object/oop_project/test/build/CMakeFiles/date_test.dir

@@ -1,2 +1,0 @@
-/usr/bin/ar qc libsource.a  CMakeFiles/source.dir/home/anonymous/CS/programming_list/programming/object/oop_project/date.cc.o
-/usr/bin/ranlib libsource.a

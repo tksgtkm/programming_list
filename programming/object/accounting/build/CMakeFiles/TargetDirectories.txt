@@ -1,4 +1,0 @@
-/home/anonymous/CS/programming_list/programming/object/accounting/build/CMakeFiles/rebuild_cache.dir
-/home/anonymous/CS/programming_list/programming/object/accounting/build/CMakeFiles/accounting.dir
-/home/anonymous/CS/programming_list/programming/object/accounting/build/CMakeFiles/edit_cache.dir
-/home/anonymous/CS/programming_list/programming/object/accounting/build/CMakeFiles/main.dir

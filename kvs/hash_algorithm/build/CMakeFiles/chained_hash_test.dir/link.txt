@@ -1,1 +1,0 @@
-/usr/bin/cc    CMakeFiles/chained_hash_test.dir/chained_hash_test.c.o  -o chained_hash_test  libhash_data.a 

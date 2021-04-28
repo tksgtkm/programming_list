@@ -1,3 +1,0 @@
-/home/onimas/computer_science/cmake/type1/build/CMakeFiles/rebuild_cache.dir
-/home/onimas/computer_science/cmake/type1/build/CMakeFiles/hello_cmake.dir
-/home/onimas/computer_science/cmake/type1/build/CMakeFiles/edit_cache.dir

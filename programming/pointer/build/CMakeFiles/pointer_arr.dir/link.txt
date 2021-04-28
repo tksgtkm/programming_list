@@ -1,1 +1,0 @@
-/usr/bin/c++     CMakeFiles/pointer_arr.dir/pointer_arr.cc.o  -o pointer_arr 

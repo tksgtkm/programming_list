@@ -1,1 +1,0 @@
-/usr/bin/cc    CMakeFiles/open_hash_test.dir/open_hash_test.c.o  -o open_hash_test  libhash.a 

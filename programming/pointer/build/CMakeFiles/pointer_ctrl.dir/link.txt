@@ -1,1 +1,0 @@
-/usr/bin/c++     CMakeFiles/pointer_ctrl.dir/pointer_ctrl.cc.o  -o pointer_ctrl 

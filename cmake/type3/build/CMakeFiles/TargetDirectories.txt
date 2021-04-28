@@ -1,4 +1,0 @@
-/home/onimas/computer_science/cmake/type3/build/CMakeFiles/rebuild_cache.dir
-/home/onimas/computer_science/cmake/type3/build/CMakeFiles/edit_cache.dir
-/home/onimas/computer_science/cmake/type3/build/CMakeFiles/hello_library.dir
-/home/onimas/computer_science/cmake/type3/build/CMakeFiles/hello_binary.dir

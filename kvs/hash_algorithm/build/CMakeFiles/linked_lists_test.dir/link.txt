@@ -1,1 +1,0 @@
-/usr/bin/cc    CMakeFiles/linked_lists_test.dir/linked_lists_test.c.o  -o linked_lists_test  libhash_data.a 
