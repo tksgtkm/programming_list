@@ -1,3 +1,6 @@
+#ifndef __LenText_H
+#define __LenText_H
+
 #include <iostream>
 
 class LengthTextBuffer {
@@ -16,3 +19,5 @@ private:
   int MAX_BYTES;
   int next_byte;
 };
+
+#endif

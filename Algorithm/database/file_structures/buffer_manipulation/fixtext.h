@@ -1,3 +1,6 @@
+#ifndef __FixText_H
+#define __FixText_H
+
 #include <iostream.h>
 
 class FixedTextBuffer {
@@ -28,3 +31,5 @@ private:
   int packing;
   int next_character;
 };
+
+#endif
